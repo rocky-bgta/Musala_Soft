@@ -36,8 +36,8 @@ public class GatewayEntity extends BaseEntity {
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="ip4_address")
-	private String ip4address;
+	@Column(name="ipv4_address")
+	private String ipv4address;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "gateway")
 	List<PeripheralEntity> peripheralEntityList = new ArrayList<>();

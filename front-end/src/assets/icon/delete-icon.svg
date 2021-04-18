@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="13.091" height="15" viewBox="0 0 13.091 15">
+    <defs>
+        <style>
+            .cls-1{fill:#d0021b}
+        </style>
+    </defs>
+    <g id="Layer_1" transform="translate(-4 -2.25)">
+        <g id="Group_6952" transform="translate(4 2.25)">
+            <path id="Path_15214" d="M19.045 18.3a.546.546 0 0 0 .545-.545V12.3a.545.545 0 1 0-1.091 0v5.45a.546.546 0 0 0 .546.55z" class="cls-1" transform="translate(-10.591 -6.568)"/>
+            <path id="Path_15215" d="M12.045 18.3a.546.546 0 0 0 .545-.545V12.3a.545.545 0 0 0-1.091 0v5.45a.546.546 0 0 0 .546.55z" class="cls-1" transform="translate(-7.409 -6.568)"/>
+            <path id="Path_15216" d="M15.909 3.341a.545.545 0 0 0 0-1.091h-4.364a.545.545 0 1 0 0 1.091z" class="cls-1" transform="translate(-7.182 -2.25)"/>
+            <path id="Path_15217" d="M4.545 5.25a.545.545 0 0 0 0 1.091h.545v10.036a2.239 2.239 0 0 0 2.236 2.236h6.436A2.239 2.239 0 0 0 16 16.377V6.341h.545a.545.545 0 1 0 0-1.091h-12zm10.364 1.091v10.036a1.145 1.145 0 0 1-1.145 1.145H7.327a1.145 1.145 0 0 1-1.145-1.145V6.341z" class="cls-1" transform="translate(-4 -3.614)"/>
+        </g>
+    </g>
+</svg>

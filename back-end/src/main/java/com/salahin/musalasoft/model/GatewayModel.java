@@ -12,9 +12,9 @@ public class GatewayModel {
     private UUID id;
 
     @Size(min=1, max=100)
-    @NotNull(message = "Name is mandatory")
+    @NotNull(message = "Gateway name is mandatory")
     private String name;
 
-    @Size(max=500)
-    private String ip4address;
+    @Size(max=150)
+    private String ipv4address;
 }

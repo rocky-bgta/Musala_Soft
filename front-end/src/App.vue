@@ -30,20 +30,20 @@
     </v-app-bar>
 
     <v-main>
-      <Todo/>
+      <Gateway/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Todo from './components/Todo';
+import Gateway from './components/Gateway';
 
 export default {
   name: 'App',
 
   components: {
     // eslint-disable-next-line vue/no-unused-components
-    Todo,
+    Gateway,
   },
 
   data: () => ({

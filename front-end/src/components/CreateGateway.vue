@@ -3,7 +3,7 @@
     <v-dialog
         v-model="dialog"
         width="535"
-        @click:outside="outSideCloseOfTodoForm">
+        @click:outside="outSideCloseOfGatewayForm">
 
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -11,12 +11,12 @@
             dark
             v-bind="attrs"
             v-on="on">
-          Add Todo
+          Add Gateway
         </v-btn>
       </template>
 
       <v-card>
-        <todo-form ref="todoFormRef" :change-dialog-status="changeDialogStatus"></todo-form>
+        <gateway-form ref="gatewayFormRef" :change-dialog-status="changeDialogStatus"></gateway-form>
       </v-card>
     </v-dialog>
 
@@ -25,12 +25,12 @@
 </template>
 
 <script>
-  import TodoForm from '@/components/TodoForm';
+  import GatewayForm from '@/components/GatewayForm';
 
   export default {
-    name: 'CreateTodo',
+    name: 'CreateGateway',
     components: {
-      todoForm: TodoForm,
+      gatewayForm: GatewayForm,
     },
     data() {
       return {
@@ -44,8 +44,8 @@
       showTodoDialog() {
         this.dialog = true;
       },
-      outSideCloseOfTodoForm(){
-        this.$refs.todoFormRef.resetForm();
+      outSideCloseOfGatewayForm(){
+        this.$refs.gatewayFormRef.resetForm();
       }
     },
     mounted() {

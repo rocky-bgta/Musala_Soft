@@ -4,9 +4,9 @@
 
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Todo Item
+          Todo List
         </h1>
-        <create-todo></create-todo>
+        <create-gateway></create-gateway>
 
         <v-data-table
             :headers="headersForTodoTable"
@@ -39,20 +39,20 @@
 </template>
 
 <script>
-  import CreateTodo from '@/components/CreateTodo';
+  import CreateGateway from '@/components/CreateGateway';
 
   export default {
     name: 'Todo',
     components: {
-      CreateTodo
+      CreateGateway
     },
     created() {
-      this.getTodoList();
+      //this.getTodoList();
     },
     updated() {
-      this.$eventBus.$on(this.$evenBusConstant.REFRESH_TODO_LIST, () => {
-        this.getTodoList();
-      });
+      // this.$eventBus.$on(this.$evenBusConstant.REFRESH_TODO_LIST, () => {
+      //   this.getTodoList();
+      // });
     },
     data() {
       return {
