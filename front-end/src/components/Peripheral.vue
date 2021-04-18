@@ -1,5 +1,5 @@
 <template>
-  <div class="package-layout">
+  <div class="peripheral-layout">
     <div style="display: flex; flex-direction: row">
       <span class="option-text">Peripheral {{ position + 1 }}: Details</span>
       <v-spacer></v-spacer>
@@ -111,10 +111,6 @@ export default {
 </script>
 
 <style scoped>
-.editor {
-  margin-bottom: 0;
-}
-
 .add-peripheral-btn {
   font-size: 12px;
   margin-top: 15px;
@@ -145,7 +141,7 @@ export default {
   margin-right: 5px;
 }
 
-.package-layout {
+.peripheral-layout {
   display: flex;
   flex-direction: column;
   padding: 16px;

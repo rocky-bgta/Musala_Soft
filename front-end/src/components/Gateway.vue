@@ -4,7 +4,7 @@
 
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Todo List
+          Gateway List
         </h1>
         <create-gateway></create-gateway>
 
@@ -15,7 +15,7 @@
             class="elevation-1"
             style="margin-top: 20px"
             :hide-default-footer="true"
-            no-data-text="Todo didn't create yet..">
+            no-data-text="Gateway didn't create yet..">
 
           <template v-slot:item.action="{item}">
             <div class="action-button-container">
