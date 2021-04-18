@@ -3,7 +3,7 @@
     <div style="display: flex; flex-direction: row">
       <span class="option-text">Peripheral {{ position + 1 }}: Details</span>
       <v-spacer></v-spacer>
-      <div class="delete-div" @click="$emit('deletePeripheral', position)">
+      <div class="delete-div" v-if="isDeletable" @click="$emit('deletePeripheral', position)">
         <img class="delete-icon" src="@/assets/icon/delete-icon.svg">
         <span style="color:#d0021b;">Delete</span>
       </div>
@@ -71,7 +71,7 @@
 
 export default {
   name: "Peripheral",
-  props: ['position', 'pkgCount', 'peripheral'],
+  props: ['position', 'peripheralCount', 'peripheral'],
   data() {
     return {
       isValid: true,
@@ -100,17 +100,10 @@ export default {
   },
   computed: {
     isDeletable() {
-      return this.pkgCount > 1
+      return this.peripheralCount > 1
     },
     isAddVisible() {
-      // let pageInfo = this.$store.getters.getPageInfo;
-      //
-      // if (pageInfo.packages) {
-      //   return pageInfo.packages.length === this.position + 1
-      //       && pageInfo.packages.length !== parseInt(process.env.VUE_APP_MAX_PACKAGE_LIMIT);
-      // }
-
-      return true;
+      return this.peripheralCount < 10;
     },
 
   },

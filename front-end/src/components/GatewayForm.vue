@@ -25,7 +25,7 @@
       <peripheral v-for="(peripheral, index) in peripherals"
                       @addPeripheral="addPeripheral"
                       @deletePeripheral="deletePeripheral"
-                      :pkg-count="peripherals.length"
+                      :peripheral-count="peripherals.length"
                       :peripheral="peripheral"
                       :position="index" :key="index"></peripheral>
 
