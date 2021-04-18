@@ -53,7 +53,7 @@
 
     </v-form>
     <v-btn color="primary"
-
+           class="add-peripheral-btn"
            v-show="isAddVisible"
            width="150"
            height="32"
@@ -115,7 +115,7 @@ export default {
   margin-bottom: 0;
 }
 
-.add-package-btn {
+.add-peripheral-btn {
   font-size: 12px;
   margin-top: 15px;
 }
