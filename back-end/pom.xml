@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.salahin</groupId>
-	<artifactId>todo</artifactId>
+	<artifactId>musalasoft</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>todo</name>
-	<description>Demo of Todo Task</description>
+	<name>musalasoft</name>
+	<description>Demo Task of MusalaSoft</description>
 	<properties>
 		<java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
