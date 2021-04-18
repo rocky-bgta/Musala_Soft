@@ -117,6 +117,7 @@ import Peripheral from "@/components/Peripheral";
         this.gateway.name = '';
         this.gateway.ipv4address = '';
         this.pageInUpdateState = false;
+        this.peripherals.splice(1,this.peripherals.length);
       },
       createGateway() {
         console.log('Peripherals info: ', JSON.stringify(this.peripherals, null, 2));
