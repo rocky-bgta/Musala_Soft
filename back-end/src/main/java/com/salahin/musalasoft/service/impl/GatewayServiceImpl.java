@@ -58,23 +58,23 @@ public class GatewayServiceImpl implements GatewayService {
 	@Override
 	public ResponseObject updateGateWay(GatewayEntity gatewayEntity) {
 		GatewayEntity updatedGatewayEntity;
-		Optional<GatewayEntity> oldGatewayEntity;
+		//Optional<GatewayEntity> oldGatewayEntity;
 		ResponseObject responseObject;
 		//UUID uuid;
 		try{
 			//uuid = gatewayModel.getId();
-			oldGatewayEntity = null; //this.gatewayRepository.findById(uuid);
-			if(oldGatewayEntity.isPresent()){
+
+			//if(oldGatewayEntity.isPresent()){
 				//updatedGatewayEntity = modelMapper.map(gatewayModel ,GatewayEntity.class);
 				updatedGatewayEntity = this.gatewayRepository.save(gatewayEntity);
 				responseObject = UtilityMethods.buildResponseObject(updatedGatewayEntity,
 					MessageConstant.SUCCESSFULLY_GATEWAY_UPDATED,
 					HttpStatus.OK);
-			}else {
-				responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
-					MessageConstant.REQUESTED_GATEWAY_DOES_NOT_EXIST_NOW,
-					HttpStatus.NO_CONTENT);
-			}
+			//}else {
+//				responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
+//					MessageConstant.REQUESTED_GATEWAY_DOES_NOT_EXIST_NOW,
+//					HttpStatus.NO_CONTENT);
+			//}
 		}catch (Exception ex){
 			log.error("updateGateway method got exception ->", ex);
 			responseObject = UtilityMethods.buildResponseObject(null,
@@ -85,12 +85,12 @@ public class GatewayServiceImpl implements GatewayService {
 	}
 	
 	@Override
-	public ResponseObject getGatewayById(UUID uuid) {
+	public ResponseObject getGatewayById(String id) {
 		Optional<GatewayEntity> gatewayEntity;
 		GatewayEntity gatewayModel;
 		ResponseObject responseObject;
 		try{
-			gatewayEntity = this.gatewayRepository.findById(uuid);
+			gatewayEntity = this.gatewayRepository.findById(id);
 			if(gatewayEntity.isPresent()){
 				gatewayModel = modelMapper.map(gatewayEntity.get(),GatewayEntity.class);
 				responseObject = UtilityMethods.buildResponseObject(gatewayModel,
@@ -130,10 +130,10 @@ public class GatewayServiceImpl implements GatewayService {
 	}
 	
 	@Override
-	public ResponseObject deleteGatewayById(UUID uuid) {
+	public ResponseObject deleteGatewayById(String id) {
 		ResponseObject responseObject;
 		try{
-			this.gatewayRepository.deleteById(uuid);
+			this.gatewayRepository.deleteById(id);
 			responseObject = UtilityMethods.buildResponseObject(null,
 				MessageConstant.SUCCESSFULLY_DELETE_GATEWAY,
 				HttpStatus.OK);

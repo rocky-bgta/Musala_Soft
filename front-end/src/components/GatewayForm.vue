@@ -8,6 +8,7 @@
           label="Enter gateway name"
           :rules="gatewayNameRule"
           outlined
+          :disabled="isDisable"
           dense
           required
           style="width: 80%">
@@ -15,6 +16,7 @@
 
       <v-text-field
           outlined
+          :disabled="isDisable"
           dense
           required
           v-model="gateway.ipv4address"
@@ -46,7 +48,7 @@
                color="#e2136e"
                class="primary"
                style="color: #FFFFFF"
-               :disabled="!isValid">Create
+               :disabled="!isValid || isDisable">Create
         </v-btn>
 
         <v-btn v-if="this.pageInUpdateState==true"
@@ -63,7 +65,7 @@
 
 <script>
 
-import Peripheral from "@/components/Peripheral";
+import Peripheral from "@/components/PeripheralForm";
 
   export default {
     name: 'GatewayForm',
@@ -80,7 +82,7 @@ import Peripheral from "@/components/Peripheral";
           name: '',
           ipv4address:''
         },
-
+        isDisable:false,
         peripherals:[],
         dialog: false,
         isValid: false,
@@ -90,9 +92,10 @@ import Peripheral from "@/components/Peripheral";
         ]
       };
     },
-    created() {
-      this.peripherals.push({vendor: '',createdDate:'',status: ''});
-    },
+    // created() {
+    //   this.isDisable = false;
+    //   this.peripherals.push({vendor: '',createdDate:'',status: ''});
+    // },
     methods: {
 
       addPeripheral(){
@@ -117,7 +120,7 @@ import Peripheral from "@/components/Peripheral";
         this.pageInUpdateState = false;
         this.peripherals.splice(1,this.peripherals.length);
         this.peripherals[0].vendor='';
-        this.peripherals[0].date='';
+        this.peripherals[0].createdDate='';
         this.peripherals[0].status='';
       },
       createGateway() {
@@ -140,8 +143,22 @@ import Peripheral from "@/components/Peripheral";
              this.changeDialogStatus();
            });
       },
+
+      getGatewayById(id) {
+        this.$restClient.get('get/'+id)
+            .then(({data}) => {
+              console.log('payload get: ', JSON.stringify(data, null, 2));
+              this.gateway = data.data;
+              this.peripherals = this.gateway.peripheralList;
+            })
+            .catch(({data}) => {
+              this.$feedback.showFailed(data.message);
+            });
+      },
+
       updateGateway() {
         this.$feedback.showLoading();
+        this.gateway.peripheralList= this.peripherals;
         this.$restClient.put('update', this.gateway)
            .then(({data}) => {
              if (data.httpStatusCode === this.$httpStatusCode.OK) {
@@ -157,14 +174,30 @@ import Peripheral from "@/components/Peripheral";
            });
       },
     },
-    updated() {
-      let copyPayload;
+    created() {
+      this.isDisable = false;
+      this.peripherals.push({vendor: '',createdDate:'',status: ''});
+      //let copyPayload;
       this.$eventBus.$on(this.$evenBusConstant.PASS_TODO_ITEM_FOR_EDIT, (payload) => {
-        copyPayload = Object.assign({}, payload);
-        if (!this.$validation.isEmptyObject(copyPayload)) {
-          this.todo = copyPayload;
-          this.pageInUpdateState = true;
-        }
+        // copyPayload = Object.assign({}, payload);
+        // if (!this.$validation.isEmptyObject(copyPayload)) {
+        //   console.log('payload 111: ', JSON.stringify(copyPayload, null, 2));
+        //   this.gateway = copyPayload;
+        //   this.peripherals = copyPayload.peripheralList;
+        //   this.pageInUpdateState = true;
+        // }
+        //copyPayload = Object.assign({}, payload);
+        this.getGatewayById(payload.id)
+        this.pageInUpdateState = true;
+        this.isDisable = false;
+
+      });
+
+      this.$eventBus.$on(this.$evenBusConstant.PASS_GATEWAY_ITEM_FOR_DETAILS, (payload) => {
+        //copyPayload = Object.assign({}, payload);
+        this.getGatewayById(payload.id)
+        this.pageInUpdateState = false;
+        this.isDisable = true;
       });
     },
   };

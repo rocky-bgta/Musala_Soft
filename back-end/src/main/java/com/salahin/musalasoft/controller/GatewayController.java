@@ -40,7 +40,7 @@ public class GatewayController {
     }
 	
 	@GetMapping("get/{id}")
-	public ResponseObject getGatewayById(@PathVariable UUID id){
+	public ResponseObject getGatewayById(@PathVariable String id){
 		ResponseObject responseObject;
 		responseObject = this.gatewayService.getGatewayById(id);
 		return responseObject;
@@ -61,7 +61,7 @@ public class GatewayController {
 	}
 	
 	@DeleteMapping("delete/{id}")
-	public ResponseObject deleteGateway(@PathVariable UUID id){
+	public ResponseObject deleteGateway(@PathVariable String id){
 		ResponseObject responseObject;
 		responseObject = this.gatewayService.deleteGatewayById(id);
 		return responseObject;

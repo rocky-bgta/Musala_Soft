@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Gateway from './components/Gateway';
+import Gateway from './components/GatewayList';
 
 export default {
   name: 'App',

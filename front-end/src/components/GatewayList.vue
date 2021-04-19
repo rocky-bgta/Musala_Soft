@@ -19,6 +19,13 @@
 
           <template v-slot:item.action="{item}">
             <div class="action-button-container">
+
+              <v-chip outlined
+                      style="margin-right: 12px"
+                      @click="gatewayDetails(item)"
+                      color="info">Details
+              </v-chip>
+
               <v-chip outlined
                       @click="editTodo(item)"
                       color="info">Edit
@@ -42,7 +49,7 @@
   import CreateGateway from '@/components/CreateGateway';
 
   export default {
-    name: 'Todo',
+    name: 'GatewayList',
     components: {
       CreateGateway
     },
@@ -79,6 +86,14 @@
           resolve();
         });
         this.$eventBus.$emit(this.$evenBusConstant.PASS_TODO_ITEM_FOR_EDIT, item);
+      },
+
+      async gatewayDetails(item){
+        await new Promise(resolve => {
+          this.$eventBus.$emit(this.$evenBusConstant.SHOW_TODO_FORM);
+          resolve();
+        });
+        this.$eventBus.$emit(this.$evenBusConstant.PASS_GATEWAY_ITEM_FOR_DETAILS, item);
       },
 
       async doneTodo(item) {

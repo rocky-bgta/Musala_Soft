@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface GatewayService {
 	ResponseObject createGateWay(GatewayEntity gatewayEntity);
 	ResponseObject updateGateWay(GatewayEntity gateWayModel);
-	ResponseObject getGatewayById(UUID uuid);
+	ResponseObject getGatewayById(String id);
 	ResponseObject getAllGateway();
-	ResponseObject deleteGatewayById(UUID uuid);
+	ResponseObject deleteGatewayById(String id);
 }

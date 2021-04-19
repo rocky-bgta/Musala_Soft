@@ -30,8 +30,8 @@ public class GatewayEntity {
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid")
-	@Column(name = "uid",columnDefinition = "CHAR(32)")
-	private String uid;
+	@Column(name = "id",columnDefinition = "CHAR(32)")
+	private String id;
 	
 	@Column(name="name")
 	private String name;
@@ -40,6 +40,6 @@ public class GatewayEntity {
 	private String ipv4address;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "gateway_fk", referencedColumnName = "uid")
+	@JoinColumn(name = "gateway_fk", referencedColumnName = "id")
 	List<PeripheralEntity> peripheralList = new ArrayList<>();
 }
