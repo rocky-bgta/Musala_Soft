@@ -27,7 +27,7 @@
               </v-chip>
 
               <v-chip outlined
-                      @click="editTodo(item)"
+                      @click="editGateway(item)"
                       color="info">Edit
               </v-chip>
               <v-chip
@@ -80,17 +80,17 @@
       };
     },
     methods: {
-      async editTodo(item) {
+      async editGateway(item) {
         await new Promise(resolve => {
-          this.$eventBus.$emit(this.$evenBusConstant.SHOW_TODO_FORM);
+          this.$eventBus.$emit(this.$evenBusConstant.SHOW_GATEWAY_FORM);
           resolve();
         });
-        this.$eventBus.$emit(this.$evenBusConstant.PASS_TODO_ITEM_FOR_EDIT, item);
+        this.$eventBus.$emit(this.$evenBusConstant.PASS_GATEWAY_ITEM_FOR_EDIT, item);
       },
 
       async gatewayDetails(item){
         await new Promise(resolve => {
-          this.$eventBus.$emit(this.$evenBusConstant.SHOW_TODO_FORM);
+          this.$eventBus.$emit(this.$evenBusConstant.SHOW_GATEWAY_FORM);
           resolve();
         });
         this.$eventBus.$emit(this.$evenBusConstant.PASS_GATEWAY_ITEM_FOR_DETAILS, item);

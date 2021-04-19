@@ -124,7 +124,7 @@ import Peripheral from "@/components/PeripheralForm";
         this.peripherals[0].status='';
       },
       createGateway() {
-        console.log('Peripherals info: ', JSON.stringify(this.peripherals, null, 2));
+        //console.log('Peripherals info: ', JSON.stringify(this.peripherals, null, 2));
         this.gateway.peripheralList= this.peripherals;
 
 
@@ -188,6 +188,7 @@ import Peripheral from "@/components/PeripheralForm";
         this.getGatewayById(payload.id)
         this.pageInUpdateState = false;
         this.isDisable = true;
+
       });
 
     },
