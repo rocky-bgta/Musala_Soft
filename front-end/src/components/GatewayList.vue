@@ -34,7 +34,7 @@
                   outlined
                   color="success"
                   style="margin-left: 15px"
-                  @click="doneTodo(item)">Done
+                  @click="deleteGateway(item)">Delete
               </v-chip>
             </div>
           </template>
@@ -96,14 +96,14 @@
         this.$eventBus.$emit(this.$evenBusConstant.PASS_GATEWAY_ITEM_FOR_DETAILS, item);
       },
 
-      async doneTodo(item) {
+      async deleteGateway(item) {
         let confirmed = await this.$feedback.getConfirmation();
         if (!confirmed) return;
 
         this.$restClient.delete('delete/'+item.id)
            .then(({data}) => {
              if (data.httpStatusCode === this.$httpStatusCode.OK) {
-               this.getTodoList();
+               this.getGatewayList();
              }
              this.$feedback.showSuccessMessage(data.message);
            }).catch(({data}) => {

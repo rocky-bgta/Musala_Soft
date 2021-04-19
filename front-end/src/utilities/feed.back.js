@@ -14,8 +14,8 @@ export default {
         return Swal.fire({
             icon: 'warning',
             iconColor: '#b3dc10',
-            titleText: "Your Todo Item done !",
-            text: "You are about finished this task",
+            titleText: " Delete Gateway !!!",
+            text: "You are about delete this gateway",
             reverseButtons: true,
             showDenyButton: true,
             showConfirmButton: true,
