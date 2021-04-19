@@ -2,8 +2,9 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
+      color="white"
       dark
+      height="120px"
     >
       <div class="d-flex align-center">
         <v-img
@@ -11,7 +12,7 @@
           class="shrink mt-1 hidden-sm-and-down"
           contain
           min-width="100"
-          src="https://www.proit.lt/html/media/images/proit.png"
+          src="@/assets/musala_Logo_green.svg"
           width="100"
         />
       </div>
@@ -19,11 +20,11 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://www.eastnetic.com/t"
+        href="https://www.musala.com/company/"
         target="_blank"
         text
       >
-        <span class="mr-2">EastNetic</span>
+        <span class="mr-2" style="color: black">Musala Soft</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
 

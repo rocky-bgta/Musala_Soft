@@ -10,7 +10,6 @@
 
     </div>
     <v-form v-model="isValid">
-      {{disableForDetails}}
       <v-text-field
           v-model="peripheral.vendor"
           label="vendor name"

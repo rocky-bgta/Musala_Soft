@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @Slf4j
@@ -58,23 +57,12 @@ public class GatewayServiceImpl implements GatewayService {
 	@Override
 	public ResponseObject updateGateWay(GatewayEntity gatewayEntity) {
 		GatewayEntity updatedGatewayEntity;
-		//Optional<GatewayEntity> oldGatewayEntity;
 		ResponseObject responseObject;
-		//UUID uuid;
 		try{
-			//uuid = gatewayModel.getId();
-
-			//if(oldGatewayEntity.isPresent()){
-				//updatedGatewayEntity = modelMapper.map(gatewayModel ,GatewayEntity.class);
 				updatedGatewayEntity = this.gatewayRepository.save(gatewayEntity);
 				responseObject = UtilityMethods.buildResponseObject(updatedGatewayEntity,
 					MessageConstant.SUCCESSFULLY_GATEWAY_UPDATED,
 					HttpStatus.OK);
-			//}else {
-//				responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
-//					MessageConstant.REQUESTED_GATEWAY_DOES_NOT_EXIST_NOW,
-//					HttpStatus.NO_CONTENT);
-			//}
 		}catch (Exception ex){
 			log.error("updateGateway method got exception ->", ex);
 			responseObject = UtilityMethods.buildResponseObject(null,
