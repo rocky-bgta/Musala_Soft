@@ -49,7 +49,7 @@
       }
     },
     mounted() {
-      this.$eventBus.$on(this.$evenBusConstant.SHOW_TODO_FORM, () => {
+      this.$eventBus.$on(this.$evenBusConstant.SHOW_GATEWAY_FORM, () => {
         this.showTodoDialog();
       });
     }

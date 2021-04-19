@@ -134,7 +134,7 @@ import Peripheral from "@/components/PeripheralForm";
              if (data.httpStatusCode === this.$httpStatusCode.OK) {
                this.changeDialogStatus();
                this.resetForm();
-               this.$eventBus.$emit(this.$evenBusConstant.REFRESH_TODO_LIST);
+               this.$eventBus.$emit(this.$evenBusConstant.REFRESH_GATEWAY_LIST);
              }
              this.$feedback.showSuccessMessage(data.message);
            })
@@ -164,7 +164,7 @@ import Peripheral from "@/components/PeripheralForm";
              if (data.httpStatusCode === this.$httpStatusCode.OK) {
                this.changeDialogStatus();
                this.resetForm();
-               this.$eventBus.$emit(this.$evenBusConstant.REFRESH_TODO_LIST);
+               this.$eventBus.$emit(this.$evenBusConstant.REFRESH_GATEWAY_LIST);
              }
              this.$feedback.showSuccessMessage(data.message);
            })
@@ -177,28 +177,19 @@ import Peripheral from "@/components/PeripheralForm";
     created() {
       this.isDisable = false;
       this.peripherals.push({vendor: '',createdDate:'',status: ''});
-      //let copyPayload;
-      this.$eventBus.$on(this.$evenBusConstant.PASS_TODO_ITEM_FOR_EDIT, (payload) => {
-        // copyPayload = Object.assign({}, payload);
-        // if (!this.$validation.isEmptyObject(copyPayload)) {
-        //   console.log('payload 111: ', JSON.stringify(copyPayload, null, 2));
-        //   this.gateway = copyPayload;
-        //   this.peripherals = copyPayload.peripheralList;
-        //   this.pageInUpdateState = true;
-        // }
-        //copyPayload = Object.assign({}, payload);
+
+      this.$eventBus.$on(this.$evenBusConstant.PASS_GATEWAY_ITEM_FOR_EDIT, (payload) => {
         this.getGatewayById(payload.id)
         this.pageInUpdateState = true;
         this.isDisable = false;
-
       });
 
       this.$eventBus.$on(this.$evenBusConstant.PASS_GATEWAY_ITEM_FOR_DETAILS, (payload) => {
-        //copyPayload = Object.assign({}, payload);
         this.getGatewayById(payload.id)
         this.pageInUpdateState = false;
         this.isDisable = true;
       });
+
     },
   };
 </script>

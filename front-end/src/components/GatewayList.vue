@@ -55,11 +55,11 @@
     },
     created() {
       this.getGatewayList();
-    },
-    updated() {
-      // this.$eventBus.$on(this.$evenBusConstant.REFRESH_TODO_LIST, () => {
-      //   this.getTodoList();
-      // });
+
+      this.$eventBus.$on(this.$evenBusConstant.REFRESH_GATEWAY_LIST, () => {
+        this.getGatewayList();
+      });
+
     },
     data() {
       return {
