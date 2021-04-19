@@ -29,7 +29,7 @@
           min-width="auto">
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
-              v-model="peripheral.date"
+              v-model="peripheral.createdDate"
               prepend-icon="mdi-calendar"
               label="Pick a date"
               style="width: 80%; margin-top: -20px"
@@ -40,7 +40,7 @@
           ></v-text-field>
         </template>
         <v-date-picker
-            v-model="peripheral.date"
+            v-model="peripheral.createdDate"
             @input="menu2 = false">
         </v-date-picker>
       </v-menu>

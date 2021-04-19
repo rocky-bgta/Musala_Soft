@@ -12,7 +12,6 @@ package com.salahin.musalasoft.service.impl;
 import com.salahin.musalasoft.constant.MessageConstant;
 import com.salahin.musalasoft.core.ResponseObject;
 import com.salahin.musalasoft.entities.GatewayEntity;
-import com.salahin.musalasoft.model.GatewayModel;
 import com.salahin.musalasoft.repository.GatewayRepository;
 import com.salahin.musalasoft.service.GatewayService;
 import com.salahin.musalasoft.utilities.UtilityMethods;
@@ -25,7 +24,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -40,14 +38,12 @@ public class GatewayServiceImpl implements GatewayService {
 	}
 	
 	@Override
-	public ResponseObject createGateWay(GatewayModel getGatewayModel) {
-		GatewayEntity gatewayEntity;
+	public ResponseObject createGateWay(GatewayEntity gatewayEntity) {
+
 		ResponseObject responseObject;
 		try{
-			gatewayEntity = modelMapper.map(getGatewayModel,GatewayEntity.class);
 			gatewayEntity = this.gatewayRepository.save(gatewayEntity);
-			getGatewayModel.setId(gatewayEntity.getId());
-			responseObject = UtilityMethods.buildResponseObject(getGatewayModel,
+			responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
 				MessageConstant.SUCCESSFULLY_GATEWAY_CREATED,
 				HttpStatus.OK);
 		}catch (Exception ex){
@@ -60,22 +56,22 @@ public class GatewayServiceImpl implements GatewayService {
 	}
 	
 	@Override
-	public ResponseObject updateGateWay(GatewayModel gatewayModel) {
+	public ResponseObject updateGateWay(GatewayEntity gatewayEntity) {
 		GatewayEntity updatedGatewayEntity;
 		Optional<GatewayEntity> oldGatewayEntity;
 		ResponseObject responseObject;
-		UUID uuid;
+		//UUID uuid;
 		try{
-			uuid = gatewayModel.getId();
-			oldGatewayEntity = this.gatewayRepository.findById(uuid);
+			//uuid = gatewayModel.getId();
+			oldGatewayEntity = null; //this.gatewayRepository.findById(uuid);
 			if(oldGatewayEntity.isPresent()){
-				updatedGatewayEntity = modelMapper.map(gatewayModel ,GatewayEntity.class);
-				updatedGatewayEntity = this.gatewayRepository.save(updatedGatewayEntity);
+				//updatedGatewayEntity = modelMapper.map(gatewayModel ,GatewayEntity.class);
+				updatedGatewayEntity = this.gatewayRepository.save(gatewayEntity);
 				responseObject = UtilityMethods.buildResponseObject(updatedGatewayEntity,
 					MessageConstant.SUCCESSFULLY_GATEWAY_UPDATED,
 					HttpStatus.OK);
 			}else {
-				responseObject = UtilityMethods.buildResponseObject(gatewayModel,
+				responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
 					MessageConstant.REQUESTED_GATEWAY_DOES_NOT_EXIST_NOW,
 					HttpStatus.NO_CONTENT);
 			}
@@ -91,12 +87,12 @@ public class GatewayServiceImpl implements GatewayService {
 	@Override
 	public ResponseObject getGatewayById(UUID uuid) {
 		Optional<GatewayEntity> gatewayEntity;
-		GatewayModel gatewayModel;
+		GatewayEntity gatewayModel;
 		ResponseObject responseObject;
 		try{
 			gatewayEntity = this.gatewayRepository.findById(uuid);
 			if(gatewayEntity.isPresent()){
-				gatewayModel = modelMapper.map(gatewayEntity.get(),GatewayModel.class);
+				gatewayModel = modelMapper.map(gatewayEntity.get(),GatewayEntity.class);
 				responseObject = UtilityMethods.buildResponseObject(gatewayModel,
 					MessageConstant.SUCCESSFULLY_GET_GATEWAY_BY_PROVIDED_ID,
 					HttpStatus.OK);
@@ -116,14 +112,10 @@ public class GatewayServiceImpl implements GatewayService {
 	
 	@Override
 	public ResponseObject getAllGateway() {
-		List<GatewayModel> gatewayModelList;
 		ResponseObject responseObject;
 		try{
-			gatewayModelList =  this.gatewayRepository.findAll()
-				.stream()
-				.map(element -> modelMapper.map(element, GatewayModel.class))
-				.collect(Collectors.toList());
-			responseObject = UtilityMethods.buildResponseObject(gatewayModelList,
+			List<GatewayEntity>  gatewayEntities = this.gatewayRepository.findAll();
+			responseObject = UtilityMethods.buildResponseObject(gatewayEntities,
 				MessageConstant.SUCCESSFULLY_GET_ALL_GATEWAY,
 				HttpStatus.OK);
 			

@@ -25,13 +25,12 @@ import java.util.UUID;
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "gateway")
-public class GatewayEntity extends BaseEntity {
-	
+public class GatewayEntity {
+
 	@Id
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name = "uuid2", strategy = "uuid2")
-	@Column(name = "id", nullable = false)
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "uid", nullable = false)
+	private Long uid;
 	
 	@Column(name="name")
 	private String name;
@@ -39,6 +38,7 @@ public class GatewayEntity extends BaseEntity {
 	@Column(name="ipv4_address")
 	private String ipv4address;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "gateway")
-	List<PeripheralEntity> peripheralEntityList = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "gateway_fk", referencedColumnName = "uid")
+	List<PeripheralEntity> peripheralList = new ArrayList<>();
 }

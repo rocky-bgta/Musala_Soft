@@ -10,7 +10,7 @@
 package com.salahin.musalasoft.controller;
 
 import com.salahin.musalasoft.core.ResponseObject;
-import com.salahin.musalasoft.model.GatewayModel;
+import com.salahin.musalasoft.entities.GatewayEntity;
 import com.salahin.musalasoft.service.GatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/api/gateway",
+@RequestMapping(value = "/api/gateway/",
 	consumes= {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE, MediaType.ALL_VALUE},
 	produces = MediaType.APPLICATION_JSON_VALUE)
 public class GatewayController {
@@ -33,9 +33,9 @@ public class GatewayController {
 	}
 	
 	@PostMapping("create")
-    public ResponseObject createGateway(@Valid @RequestBody GatewayModel gatewayModel){
+    public ResponseObject createGateway(@Valid @RequestBody GatewayEntity gatewayEntity){
         ResponseObject responseObject;
-		responseObject = this.gatewayService.createGateWay(gatewayModel);
+		responseObject = this.gatewayService.createGateWay(gatewayEntity);
         return responseObject;
     }
 	
@@ -54,9 +54,9 @@ public class GatewayController {
 	}
  
 	@PutMapping("update")
-	public ResponseObject updateGateway(@Valid @RequestBody GatewayModel gatewayModel){
+	public ResponseObject updateGateway(@Valid @RequestBody GatewayEntity gatewayEntity){
 		ResponseObject responseObject;
-		responseObject = this.gatewayService.updateGateWay(gatewayModel);
+		responseObject = this.gatewayService.updateGateWay(gatewayEntity);
 		return responseObject;
 	}
 	

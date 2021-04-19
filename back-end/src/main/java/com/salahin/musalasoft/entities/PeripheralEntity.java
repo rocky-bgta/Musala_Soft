@@ -37,8 +37,8 @@ public class PeripheralEntity {
 	@Column(name="status")
 	private boolean status;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private GatewayEntity gateway;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	private GatewayEntity gateway;
 	
 
 }

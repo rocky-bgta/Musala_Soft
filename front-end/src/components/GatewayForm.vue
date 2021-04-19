@@ -13,13 +13,15 @@
           style="width: 80%">
       </v-text-field>
 
-      <v-textarea
+      <v-text-field
           outlined
+          dense
+          required
           v-model="gateway.ipv4address"
           style="width: 80%"
           label="Enter IPv4 address"
           value="">
-      </v-textarea>
+      </v-text-field>
 
 
       <peripheral v-for="(peripheral, index) in peripherals"
@@ -78,11 +80,7 @@ import Peripheral from "@/components/Peripheral";
           name: '',
           ipv4address:''
         },
-        peripheral:{
-          vendor: '',
-          date: '',
-          status: true
-        },
+
         peripherals:[],
         dialog: false,
         isValid: false,
@@ -93,18 +91,18 @@ import Peripheral from "@/components/Peripheral";
       };
     },
     created() {
-      this.peripherals.push(this.peripheral);
+      this.peripherals.push({vendor: '',createdDate:'',status: ''});
     },
     methods: {
 
       addPeripheral(){
-        this.peripherals.push({vendor: '',date:'',status: ''});
+        this.peripherals.push({vendor: '',createdDate:'',status: ''});
       },
 
       deletePeripheral(position){
         this.peripherals.splice(position, 1);
         if(this.peripherals.length==0){
-          this.peripherals.push(this.peripheral);
+          this.peripherals.push({vendor: '',createdDate:'',status: ''});
         }
       },
 
@@ -118,24 +116,29 @@ import Peripheral from "@/components/Peripheral";
         this.gateway.ipv4address = '';
         this.pageInUpdateState = false;
         this.peripherals.splice(1,this.peripherals.length);
+        this.peripherals[0].vendor='';
+        this.peripherals[0].date='';
+        this.peripherals[0].status='';
       },
       createGateway() {
         console.log('Peripherals info: ', JSON.stringify(this.peripherals, null, 2));
+        this.gateway.peripheralList= this.peripherals;
 
-        // this.$restClient.post('create', this.gateway)
-        //    .then(({data}) => {
-        //      console.log(this.$httpStatusCode.OK);
-        //      if (data.httpStatusCode === this.$httpStatusCode.OK) {
-        //        this.changeDialogStatus();
-        //        this.resetForm();
-        //        this.$eventBus.$emit(this.$evenBusConstant.REFRESH_TODO_LIST);
-        //      }
-        //      this.$feedback.showSuccessMessage(data.message);
-        //    })
-        //    .catch(({data}) => {
-        //      this.$feedback.showFailed(data.message);
-        //      this.changeDialogStatus();
-        //    });
+
+        this.$restClient.post('create', this.gateway)
+           .then(({data}) => {
+             console.log(this.$httpStatusCode.OK);
+             if (data.httpStatusCode === this.$httpStatusCode.OK) {
+               this.changeDialogStatus();
+               this.resetForm();
+               this.$eventBus.$emit(this.$evenBusConstant.REFRESH_TODO_LIST);
+             }
+             this.$feedback.showSuccessMessage(data.message);
+           })
+           .catch(({data}) => {
+             this.$feedback.showFailed(data.message);
+             this.changeDialogStatus();
+           });
       },
       updateGateway() {
         this.$feedback.showLoading();
