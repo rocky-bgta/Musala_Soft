@@ -19,6 +19,7 @@
           :disabled="isDisable"
           dense
           required
+          :rules="ipv4addressRule"
           v-model="gateway.ipv4address"
           style="width: 80%"
           label="Enter IPv4 address"
@@ -90,7 +91,12 @@ import Peripheral from "@/components/PeripheralForm";
         pageInUpdateState: false,
         gatewayNameRule: [
           (v) => !!v || 'Gateway Name is required'
-        ]
+        ],
+        ipv4addressRule:[
+          (v) => !!v || 'IPv4 address is required',
+          (v) => /\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b/.test(v)
+              || 'Provide valid IPv4 address'
+        ],
       };
     },
     // created() {
