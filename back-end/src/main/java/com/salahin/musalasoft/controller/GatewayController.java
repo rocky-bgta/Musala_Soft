@@ -1,6 +1,6 @@
 /**
  * Created By: Md. Nazmus Salahin
- * Created Date: 23-Jan-2021
+ * Created Date: 17-April-2021
  * Time: 8:14 PM
  * Modified By:
  * Modified date:
@@ -17,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/api/gateway/",
