@@ -9,9 +9,9 @@
         <create-gateway></create-gateway>
 
         <v-data-table
-            :headers="headersForTodoTable"
-            :items-per-page=numberOfTodo
-            :items="todoList"
+            :headers="headersForGatewayTable"
+            :items-per-page=numberOfGateway
+            :items="gatewayList"
             class="elevation-1"
             style="margin-top: 20px"
             :hide-default-footer="true"
@@ -47,7 +47,7 @@
       CreateGateway
     },
     created() {
-      //this.getTodoList();
+      this.getGatewayList();
     },
     updated() {
       // this.$eventBus.$on(this.$evenBusConstant.REFRESH_TODO_LIST, () => {
@@ -56,21 +56,20 @@
     },
     data() {
       return {
-        numberOfTodo: 0,
-        headersForTodoTable: [
+        numberOfGateway: 0,
+        headersForGatewayTable: [
           {
-            text: 'Item Name',
+            text: 'Gateway Name',
             align: 'start',
             sortable: false,
             width: '20%',
-            value: 'itemName',
+            value: 'name',
             class: 'table-header-text'
           },
-          {text: 'Description', value: 'description', width: '45%', class: 'table-header-text'},
-          {text: 'Date', value: 'date', width: '15%', class: 'table-header-text'},
+          {text: 'IPV4 Address', value: 'ipv4address', width: '45%', class: 'table-header-text'},
           {text: 'Action', value: 'action', width: '20%', class: 'table-header-text'}
         ],
-        todoList: []
+        gatewayList: []
       };
     },
     methods: {
@@ -97,11 +96,11 @@
            });
       },
 
-      getTodoList() {
+      getGatewayList() {
         this.$restClient.get('list')
            .then(({data}) => {
-             this.todoList = data.data;
-             this.numberOfTodo = parseInt(this.todoList.length);
+             this.gatewayList = data.data;
+             this.numberOfGateway = parseInt(this.gatewayList.length);
            })
            .catch(({data}) => {
              this.$feedback.showFailed(data.message);
