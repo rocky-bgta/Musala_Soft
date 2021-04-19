@@ -10,11 +10,13 @@
 
     </div>
     <v-form v-model="isValid">
+      {{disableForDetails}}
       <v-text-field
           v-model="peripheral.vendor"
           label="vendor name"
           placeholder="Vendor name"
           :rules="nameRules"
+          :disabled="disableForDetails"
           dense
           required
           type="text"
@@ -32,6 +34,7 @@
               v-model="peripheral.createdDate"
               prepend-icon="mdi-calendar"
               label="Pick a date"
+              :disabled="disableForDetails"
               style="width: 80%; margin-top: -20px"
               readonly
               :rules="dateSelectionRules"
@@ -48,6 +51,7 @@
       <span class="option-text">Status</span>
       <v-switch
           v-model="peripheral.status"
+          :disabled="disableForDetails"
           :label="`Switch 1: ${peripheral.status.toString()}`"
       ></v-switch>
 
@@ -71,7 +75,7 @@
 
 export default {
   name: "Peripheral",
-  props: ['position', 'peripheralCount', 'peripheral'],
+  props: ['position', 'peripheralCount', 'peripheral', 'disableForDetails'],
   data() {
     return {
       isValid: true,
@@ -100,10 +104,14 @@ export default {
   },
   computed: {
     isDeletable() {
-      return this.peripheralCount > 1
+      if(this.disableForDetails)
+        return false
+      else return this.peripheralCount > 1
     },
     isAddVisible() {
-      return this.peripheralCount < 10;
+      if(this.disableForDetails)
+        return false
+      else return this.peripheralCount < 10;
     },
 
   },

@@ -31,6 +31,7 @@
                       @deletePeripheral="deletePeripheral"
                       :peripheral-count="peripherals.length"
                       :peripheral="peripheral"
+                      :disable-for-details="isDisable"
                       :position="index" :key="index"></peripheral>
 
 
@@ -122,11 +123,10 @@ import Peripheral from "@/components/PeripheralForm";
         this.peripherals[0].vendor='';
         this.peripherals[0].createdDate='';
         this.peripherals[0].status='';
+        this.isDisable = false;
       },
       createGateway() {
-        //console.log('Peripherals info: ', JSON.stringify(this.peripherals, null, 2));
         this.gateway.peripheralList= this.peripherals;
-
 
         this.$restClient.post('create', this.gateway)
            .then(({data}) => {
@@ -188,9 +188,7 @@ import Peripheral from "@/components/PeripheralForm";
         this.getGatewayById(payload.id)
         this.pageInUpdateState = false;
         this.isDisable = true;
-
       });
-
     },
   };
 </script>
