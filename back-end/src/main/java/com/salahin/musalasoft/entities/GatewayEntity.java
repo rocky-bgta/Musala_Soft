@@ -28,9 +28,10 @@ import java.util.UUID;
 public class GatewayEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "uid", nullable = false)
-	private Long uid;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid")
+	@Column(name = "uid",columnDefinition = "CHAR(32)")
+	private String uid;
 	
 	@Column(name="name")
 	private String name;
