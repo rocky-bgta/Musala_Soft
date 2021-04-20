@@ -9,11 +9,13 @@
 
 package com.salahin.musalasoft.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -31,14 +33,11 @@ public class PeripheralEntity {
 	@Column(name="vendor")
 	private String vendor;
 
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "created_date")
-	private Date createdDate;
+	private LocalDate createdDate;
 	
 	@Column(name="status")
 	private boolean status;
-
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	private GatewayEntity gateway;
-	
 
 }
