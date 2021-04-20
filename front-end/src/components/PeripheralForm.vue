@@ -1,7 +1,7 @@
 <template>
   <div class="peripheral-layout">
     <div style="display: flex; flex-direction: row">
-      <span class="option-text">Peripheral {{ position + 1 }}: Details</span>
+      <span class="option-text">Peripheral No: {{ position + 1 }}</span>
       <v-spacer></v-spacer>
       <div class="delete-div" v-if="isDeletable" @click="$emit('deletePeripheral', position)">
         <img class="delete-icon" src="@/assets/icon/delete-icon.svg">
@@ -14,7 +14,6 @@
           v-model="peripheral.vendor"
           label="vendor name"
           placeholder="Vendor name"
-          :rules="nameRules"
           :disabled="disableForDetails"
           dense
           required
@@ -36,7 +35,6 @@
               :disabled="disableForDetails"
               style="width: 80%; margin-top: -20px"
               readonly
-              :rules="dateSelectionRules"
               v-bind="attrs"
               v-on="on"
           ></v-text-field>
@@ -51,7 +49,7 @@
       <v-switch
           v-model="peripheral.status"
           :disabled="disableForDetails"
-          :label="`Switch 1: ${peripheral.status.toString()}`"
+          :label="checkDeviceStatus"
       ></v-switch>
 
     </v-form>
@@ -79,26 +77,6 @@ export default {
     return {
       isValid: true,
       menu2: false,
-      // peripheral:{
-      //   vendor: '',
-      //   date: '',
-      //   status: true
-      // },
-      dateSelectionRules: [
-        (v) => !!v || "Date is required"
-      ],
-      nameRules: [
-       // v => !!v || 'Input is required',
-        //v => v.length <= 15 || "Package name must not have more than 15 characters"
-      ],
-      detailsRules: [
-       // v => !!v || 'Input is required',
-       // v => v.length <= 50 || "Package details must not have more than 50 characters"
-      ],
-      priceRules: [
-       // v => !!v || 'Input is required',
-       // v => v && v.length < 10 || 'Package price must be less than 10 digits'
-      ]
     }
   },
   computed: {
@@ -112,6 +90,11 @@ export default {
         return false
       else return this.peripheralCount < 10;
     },
+    checkDeviceStatus(){
+      if(this.peripheral.status)
+        return "Online";
+      else return "Offline";
+    }
 
   },
 }
