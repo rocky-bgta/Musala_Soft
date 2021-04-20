@@ -33,7 +33,7 @@
               <v-chip
                   outlined
                   color="error"
-                  style="margin-left: 15px"
+                  style="margin-left: 12px"
                   @click="deleteGateway(item)">Delete
               </v-chip>
             </div>
