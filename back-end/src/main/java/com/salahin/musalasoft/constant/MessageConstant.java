@@ -22,4 +22,5 @@ public class MessageConstant {
 	public static final String FAILED_TO_UPDATE_GATEWAY = "Failed to update Gateway";
 	public static final String FAILED_TO_GET_ALL_GATEWAY = "Failed to get all Gateway";
 	public static final String FAILED_TO_DELETE_GATEWAY = "Failed to Delete Gateway";
+	public static final String PERIPHERAL_CROSS_BOUNDARY = "Peripheral is more then 10";
 }

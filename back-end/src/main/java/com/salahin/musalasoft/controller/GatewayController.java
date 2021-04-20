@@ -34,7 +34,7 @@ public class GatewayController {
 	@PostMapping("create")
     public ResponseObject createGateway(@Valid @RequestBody GatewayEntity gatewayEntity){
         ResponseObject responseObject;
-		responseObject = this.gatewayService.createGateWay(gatewayEntity);
+		responseObject = this.gatewayService.createGateway(gatewayEntity);
         return responseObject;
     }
 	
@@ -55,7 +55,7 @@ public class GatewayController {
 	@PutMapping("update")
 	public ResponseObject updateGateway(@Valid @RequestBody GatewayEntity gatewayEntity){
 		ResponseObject responseObject;
-		responseObject = this.gatewayService.updateGateWay(gatewayEntity);
+		responseObject = this.gatewayService.updateGateway(gatewayEntity);
 		return responseObject;
 	}
 	

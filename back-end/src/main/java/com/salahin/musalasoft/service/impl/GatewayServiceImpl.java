@@ -12,6 +12,7 @@ package com.salahin.musalasoft.service.impl;
 import com.salahin.musalasoft.constant.MessageConstant;
 import com.salahin.musalasoft.core.ResponseObject;
 import com.salahin.musalasoft.entities.GatewayEntity;
+import com.salahin.musalasoft.entities.PeripheralEntity;
 import com.salahin.musalasoft.repository.GatewayRepository;
 import com.salahin.musalasoft.service.GatewayService;
 import com.salahin.musalasoft.utilities.UtilityMethods;
@@ -37,15 +38,21 @@ public class GatewayServiceImpl implements GatewayService {
     }
 
     @Override
-    public ResponseObject createGateWay(GatewayEntity gatewayEntity) {
-
+    public ResponseObject createGateway(GatewayEntity gatewayEntity) {
+        boolean isPeripheralValid;
         ResponseObject responseObject;
         try {
-            // check p
-            gatewayEntity = this.gatewayRepository.save(gatewayEntity);
-            responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
-                    MessageConstant.SUCCESSFULLY_GATEWAY_CREATED,
-                    HttpStatus.OK);
+            isPeripheralValid = this.isPeripheralCrossBoundary(gatewayEntity);
+            if (!isPeripheralValid) {
+                gatewayEntity = this.gatewayRepository.save(gatewayEntity);
+                responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
+                        MessageConstant.SUCCESSFULLY_GATEWAY_CREATED,
+                        HttpStatus.OK);
+            } else {
+                responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
+                        MessageConstant.PERIPHERAL_CROSS_BOUNDARY,
+                        HttpStatus.BAD_REQUEST);
+            }
         } catch (Exception ex) {
             log.error("createGateWay method got exception ->", ex);
             responseObject = UtilityMethods.buildResponseObject(null,
@@ -56,14 +63,23 @@ public class GatewayServiceImpl implements GatewayService {
     }
 
     @Override
-    public ResponseObject updateGateWay(GatewayEntity gatewayEntity) {
+    public ResponseObject updateGateway(GatewayEntity gatewayEntity) {
         GatewayEntity updatedGatewayEntity;
+        boolean isPeripheralValid;
         ResponseObject responseObject;
         try {
-            updatedGatewayEntity = this.gatewayRepository.save(gatewayEntity);
-            responseObject = UtilityMethods.buildResponseObject(updatedGatewayEntity,
-                    MessageConstant.SUCCESSFULLY_GATEWAY_UPDATED,
-                    HttpStatus.OK);
+            isPeripheralValid = this.isPeripheralCrossBoundary(gatewayEntity);
+            if (!isPeripheralValid) {
+                updatedGatewayEntity = this.gatewayRepository.save(gatewayEntity);
+                responseObject = UtilityMethods.buildResponseObject(updatedGatewayEntity,
+                        MessageConstant.SUCCESSFULLY_GATEWAY_UPDATED,
+                        HttpStatus.OK);
+            } else {
+                responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
+                        MessageConstant.PERIPHERAL_CROSS_BOUNDARY,
+                        HttpStatus.BAD_REQUEST);
+            }
+
         } catch (Exception ex) {
             log.error("updateGateway method got exception ->", ex);
             responseObject = UtilityMethods.buildResponseObject(null,
@@ -76,13 +92,11 @@ public class GatewayServiceImpl implements GatewayService {
     @Override
     public ResponseObject getGatewayById(String id) {
         Optional<GatewayEntity> gatewayEntity;
-        GatewayEntity gatewayModel;
         ResponseObject responseObject;
         try {
             gatewayEntity = this.gatewayRepository.findById(id);
             if (gatewayEntity.isPresent()) {
-                gatewayModel = modelMapper.map(gatewayEntity.get(), GatewayEntity.class);
-                responseObject = UtilityMethods.buildResponseObject(gatewayModel,
+                responseObject = UtilityMethods.buildResponseObject(gatewayEntity,
                         MessageConstant.SUCCESSFULLY_GET_GATEWAY_BY_PROVIDED_ID,
                         HttpStatus.OK);
             } else {
@@ -133,5 +147,15 @@ public class GatewayServiceImpl implements GatewayService {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseObject;
+    }
+
+    private boolean isPeripheralCrossBoundary(GatewayEntity gatewayEntity) {
+        List<PeripheralEntity> peripheralEntityList;
+        peripheralEntityList = gatewayEntity.getPeripheralList();
+        if (peripheralEntityList.size() > 10) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
