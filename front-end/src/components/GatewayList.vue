@@ -23,7 +23,7 @@
               <v-chip outlined
                       style="margin-right: 12px"
                       @click="gatewayDetails(item)"
-                      color="info">Details
+                      color="indigo">Details
               </v-chip>
 
               <v-chip outlined
@@ -32,7 +32,7 @@
               </v-chip>
               <v-chip
                   outlined
-                  color="success"
+                  color="error"
                   style="margin-left: 15px"
                   @click="deleteGateway(item)">Delete
               </v-chip>
