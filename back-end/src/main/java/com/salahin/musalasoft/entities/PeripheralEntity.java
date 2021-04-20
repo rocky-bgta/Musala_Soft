@@ -15,7 +15,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
@@ -30,16 +29,13 @@ public class PeripheralEntity {
 	@Column(name = "uid", nullable = false)
 	private Long uid;
 
-	@NotNull
 	@Column(name="vendor")
 	private String vendor;
 
-	@NotNull
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "created_date")
 	private LocalDate createdDate;
 
-	@NotNull
 	@Column(name="status")
 	private boolean status;
 
