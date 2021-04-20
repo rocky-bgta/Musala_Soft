@@ -152,7 +152,6 @@ import validation from "@/utilities/validation";
       getGatewayById(id) {
         this.$restClient.get('get/'+id)
             .then(({data}) => {
-              console.log('payload get: ', JSON.stringify(data, null, 2));
               this.gateway = data.data;
               this.peripherals = this.gateway.peripheralList;
             })
@@ -194,7 +193,7 @@ import validation from "@/utilities/validation";
     },
     created() {
       this.isDisable = false;
-      this.peripherals.push({vendor: '',createdDate:'',status: ''});
+      this.peripherals.push({vendor: '',createdDate:'',status: false});
 
       this.$eventBus.$on(this.$evenBusConstant.PASS_GATEWAY_ITEM_FOR_EDIT, (payload) => {
         this.getGatewayById(payload.id)
