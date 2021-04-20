@@ -9,16 +9,16 @@
 
 package com.salahin.musalasoft.entities;
 
-import com.salahin.musalasoft.core.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -32,10 +32,13 @@ public class GatewayEntity {
 	@GenericGenerator(name = "uuid", strategy = "uuid")
 	@Column(name = "id",columnDefinition = "CHAR(32)")
 	private String id;
-	
+
+	@NotNull
 	@Column(name="name")
 	private String name;
-	
+
+	@NotNull
+	@Pattern(regexp = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")
 	@Column(name="ipv4_address")
 	private String ipv4address;
 

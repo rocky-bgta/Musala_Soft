@@ -11,7 +11,7 @@
           :disabled="isDisable"
           dense
           required
-          style="width: 80%">
+          style="width: 80%; margin-left: -80px;">
       </v-text-field>
 
       <v-text-field
@@ -21,7 +21,7 @@
           required
           :rules="ipv4addressRule"
           v-model="gateway.ipv4address"
-          style="width: 80%"
+          style="width: 80%; margin-left: -80px;"
           label="Enter IPv4 address"
           value="">
       </v-text-field>
@@ -50,7 +50,7 @@
                color="#e2136e"
                class="primary"
                style="color: #FFFFFF"
-               :disabled="!isValid || isDisable">Create
+               :disabled="!isValid || isDisable || !disableButtonForPeripheral">Create
         </v-btn>
 
         <v-btn v-if="this.pageInUpdateState==true"
@@ -58,7 +58,7 @@
                color="#e2136e"
                class="primary"
                style="color: #FFFFFF"
-               :disabled="!isValid">Update
+               :disabled="!isValid || !disableButtonForPeripheral">Update
         </v-btn>
       </v-row>
     </div>
@@ -68,6 +68,7 @@
 <script>
 
 import Peripheral from "@/components/PeripheralForm";
+import validation from "@/utilities/validation";
 
   export default {
     name: 'GatewayForm',
@@ -99,10 +100,6 @@ import Peripheral from "@/components/PeripheralForm";
         ],
       };
     },
-    // created() {
-    //   this.isDisable = false;
-    //   this.peripherals.push({vendor: '',createdDate:'',status: ''});
-    // },
     methods: {
 
       addPeripheral(){
@@ -120,6 +117,7 @@ import Peripheral from "@/components/PeripheralForm";
         this.changeDialogStatus();
         this.resetForm();
       },
+
       resetForm() {
         this.gateway.id = '';
         this.gateway.name = '';
@@ -131,6 +129,7 @@ import Peripheral from "@/components/PeripheralForm";
         this.peripherals[0].status='';
         this.isDisable = false;
       },
+
       createGateway() {
         this.gateway.peripheralList= this.peripherals;
 
@@ -179,6 +178,19 @@ import Peripheral from "@/components/PeripheralForm";
              this.changeDialogStatus();
            });
       },
+    },
+    computed:{
+      disableButtonForPeripheral(){
+        let isValid = true;
+        for (let peripheral of this.peripherals) {
+          isValid = validation.isAllPropertyOfObjectContainValue(peripheral);
+          if (isValid == false) {
+            isValid = false;
+            break;
+          }
+        }
+        return isValid;
+      }
     },
     created() {
       this.isDisable = false;
