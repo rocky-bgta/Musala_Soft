@@ -29,14 +29,14 @@ public class PeripheralEntity {
 	@Column(name = "uid", nullable = false)
 	private Long uid;
 
-	@Column(name="vendor")
+	@Column(name="vendor", nullable = false)
 	private String vendor;
 
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "created_date")
 	private LocalDate createdDate;
 
-	@Column(name="status")
+	@Column(name="status", nullable = false)
 	private boolean status;
 
 }

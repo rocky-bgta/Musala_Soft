@@ -32,11 +32,11 @@ public class GatewayEntity {
 	@Column(name = "id",unique = true)
 	private String id;
 
-	@Column(name="name")
+	@Column(name="name", nullable = false)
 	private String name;
 
 	@Pattern(regexp = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")
-	@Column(name="ipv4_address")
+	@Column(name="ipv4_address", nullable = false)
 	private String ipv4address;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
