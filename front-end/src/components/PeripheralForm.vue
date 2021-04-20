@@ -13,6 +13,7 @@
       <v-text-field
           v-model="peripheral.vendor"
           label="vendor name"
+          :rules="vendorNameRule"
           placeholder="Vendor name"
           :disabled="disableForDetails"
           dense
@@ -32,8 +33,9 @@
               v-model="peripheral.createdDate"
               prepend-icon="mdi-calendar"
               label="Pick a date"
+              :rules="dateSelectionRule"
               :disabled="disableForDetails"
-              style="width: 80%; margin-top: -20px"
+              style="width: 80%"
               readonly
               v-bind="attrs"
               v-on="on"
@@ -77,6 +79,12 @@ export default {
     return {
       isValid: true,
       menu2: false,
+      vendorNameRule: [
+        (v) => !!v || 'Vendor Name is required'
+      ],
+      dateSelectionRule: [
+        (v) => !!v || 'Creation Date is required'
+      ],
     }
   },
   computed: {

@@ -103,13 +103,13 @@ import validation from "@/utilities/validation";
     methods: {
 
       addPeripheral(){
-        this.peripherals.push({vendor: '',createdDate:'',status: ''});
+        this.peripherals.push({vendor: '',createdDate:'',status: false});
       },
 
       deletePeripheral(position){
         this.peripherals.splice(position, 1);
         if(this.peripherals.length==0){
-          this.peripherals.push({vendor: '',createdDate:'',status: ''});
+          this.peripherals.push({vendor: '',createdDate:'',status: false});
         }
       },
 
@@ -126,7 +126,7 @@ import validation from "@/utilities/validation";
         this.peripherals.splice(1,this.peripherals.length);
         this.peripherals[0].vendor='';
         this.peripherals[0].createdDate='';
-        this.peripherals[0].status='';
+        this.peripherals[0].status=false;
         this.isDisable = false;
       },
 
