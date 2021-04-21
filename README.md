@@ -13,12 +13,12 @@
 2. Make sure 3000 port not occupied by any other application.
 
 3. Open terminal and go to back-end folder of this project
-7. Now execute the following command: <br />
+4. Now execute the following command to run the back end server: <br />
    &#8594; ./mvnw clean && ./mvnw install && ./mvnw spring-boot:run
 
-8. Open terminal and go to front-end folder of this project
-9. Make sure 8090 port not occupied by any other application.
-10. Now execute the following command: <br />
+5. Open terminal and go to front-end folder of this project
+6. Make sure 8090 port not occupied by any other application.
+7. Now execute the following command to run the front end app: <br />
     npm install <br />
     npm run serve <br />
 

@@ -23,6 +23,7 @@
         <logback.version>1.2.3</logback.version>
         <javax.validator.version>2.0.1.Final</javax.validator.version>
         <modelmapper.version>2.3.9</modelmapper.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -81,7 +82,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
